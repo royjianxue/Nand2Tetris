@@ -17,4 +17,25 @@ CHIP PC {
 
     PARTS:
     
+    //inc
+    Inc16(in=feedback, out=incOut);
+    Mux16(a=feedback, b=incOut, sel=inc, out=loadNot);
+
+    //load control
+    
+    Mux16(a=loadNot, b=in, sel=load, out=resetNot);
+
+    // reset control
+
+    Mux16(a=resetNot, b=false, sel=reset, out=inC);
+
+    // 16 bit cunter
+
+    Register(in=inC, load=true, out=out, out=feedback);
+
+
+
+
+
+
 }
